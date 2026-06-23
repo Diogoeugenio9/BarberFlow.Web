@@ -16,21 +16,23 @@
     <label>Email</label>
     <input
       type="email"
-      placeholder="Digite seu email">
+      placeholder="Digite seu email"
+      [(ngModel)] = "email">
 
     <label>Password</label>
     <input
       type="password"
-      placeholder="Digite sua senha">
+      placeholder="Digite sua senha"
+      [(ngModel)] = "senha">
 
     <a href="#">Esqueceu sua senha?</a>
 
-    <button>Sign in</button>
+    <button (click)="login()">Sign in</button>
 
 
     <p class="register">
       Não possui conta?
-      <a href="/register">Cadastre-se</a>
+      <a class='link-destaque' href="/register">Cadastre-se</a>
     </p>
 
   </div>

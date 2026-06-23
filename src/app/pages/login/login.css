@@ -96,6 +96,11 @@ a{
     "wdth" 100;
 }
 
+.link-destaque{
+  font-weight:700;
+  font-size:15px;
+}
+
 p{
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
