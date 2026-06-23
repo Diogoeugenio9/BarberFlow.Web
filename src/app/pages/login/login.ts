@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Auth } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class Login {
 
   constructor(
   private http: HttpClient,
-  private authService: Auth
+  private authService: Auth,
+  private router: Router
 ) {}
 
   login() {
@@ -35,6 +37,8 @@ export class Login {
 
         console.log('Token salvo com sucesso!');
         console.log(response.token);
+
+        this.router.navigate(['/home']);
 
 },
       error: (error) => {
