@@ -1,45 +1,42 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
-
   private router = inject(Router);
   private http = inject(HttpClient);
+  private cdr = inject(ChangeDetectorRef);
+
+  barbeiros: any[] = [];
+  carregando = true;
 
   ngOnInit(): void {
+    this.http.get('https://localhost:7134/api/Barbers').subscribe({
+      next: (response: any) => {
+        this.barbeiros = [...response];
+        this.carregando = false;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        this.carregando = false;
+        console.log('Erro ao carregar barbeiros:', error);
+      }
+    });
+  }
 
-  this.http.get(
-    'https://localhost:7134/api/Barbers'
-  ).subscribe({
-    next: (response) => {
-      console.log('Barbeiros:', response);
-    },
-    error: (error) => {
-      console.log('Erro:', error);
-    }
-  });
+  irParaLogin() {
+    this.router.navigate(['/login']);
+  }
 
+  irParaCadastro() {
+    this.router.navigate(['/register']);
+  }
 }
-
-  exibirMensagem() {
-  console.log('Botao clicado com sucesso');
-
-}
-
-irParaLogin() {
-  this.router.navigate(['/login'])
-}
-
-irParaCadastro() {
-  this.router.navigate(['/register'])
-}
-}
-
-

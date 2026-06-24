@@ -4,6 +4,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = localStorage.getItem('token');
 
+  console.log('Token interceptor:', token);
+
   if (token) {
 
     const clonedRequest = req.clone({

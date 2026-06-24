@@ -1,11 +1,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
 
 <div class="container">
   <div class="card">
@@ -35,5 +31,24 @@
       </ul>
     </div>
 
+    <div class="barbeiros">
+      <h3>Barbeiros Cadastrados</h3>
+
+      <div *ngFor="let barbeiro of barbeiros">
+        <strong>{{ barbeiro.name }}</strong>
+        <p>{{ barbeiro.specialty }}</p>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<!-- <div>
+  <h1>TESTE HOME</h1>
+  <p>Total: {{ barbeiros.length }}</p>
+  <pre>{{ barbeiros | json }}</pre>
+  <div *ngFor="let barbeiro of barbeiros">
+    <h3>{{ barbeiro.name }}</h3>
+  </div>
+</div> -->
+
