@@ -1,0 +1,49 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<div class="container">
+  <div class="card">
+
+    <button class="btn-voltar" (click)="voltar()">
+     ← Voltar
+    </button>
+
+    <div class="logo">
+      BarberFlow
+    </div>
+
+    <h1>Serviços</h1>
+
+    <p class="welcome-text">
+      Escolha o serviço que deseja agendar.
+    </p>
+
+    <div class="services">
+
+      <div class="service-card" *ngFor="let service of services">
+
+        <div class="icon">
+          ✂️
+        </div>
+
+        <div class="info">
+
+          <h4>{{ service.name }}</h4>
+
+          <p>
+            <strong></strong>
+            💲 R$ {{ service.price }}
+          </p>
+
+          <button>Selecionar</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -47,4 +47,16 @@ irParaLogin() {
   irParaCadastro() {
     this.router.navigate(['/register']);
   }
+
+  irParaServices() {
+  this.router.navigate(['/services']);
+}
+
+irParaAppointments() {
+  this.router.navigate(['/appointments']);
+}
+
+
+
+
 }
