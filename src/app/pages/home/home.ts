@@ -32,9 +32,17 @@ export class Home implements OnInit {
     });
   }
 
-  irParaLogin() {
-    this.router.navigate(['/login']);
-  }
+  isLoggedIn(): boolean {
+  return !!localStorage.getItem('token');
+}
+logout() {
+  localStorage.removeItem('token');
+  this.router.navigate(['/login']);
+}
+
+irParaLogin() {
+  this.router.navigate(['/login']);
+}
 
   irParaCadastro() {
     this.router.navigate(['/register']);

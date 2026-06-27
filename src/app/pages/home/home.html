@@ -10,15 +10,19 @@
       BarberFlow
     </div>
 
-    <h1>Bem-vindo</h1>
+    <h1>Bem-vindo 👋</h1>
 
     <p class="welcome-text">
-      Gerencie sua barbearia de forma simples e organizada.
+      <!-- Gerencie sua barbearia de forma simples e organizada. -->
     </p>
 
-    <div class="buttons">
+    <div class="buttons" *ngIf="!isLoggedIn()">
       <button (click)="irParaLogin()">Login</button>
       <button (click)="irParaCadastro()">Cadastro</button>
+    </div>
+
+    <div class="buttons" *ngIf="isLoggedIn()">
+      <button (click)="logout()">Sair</button>
     </div>
 
     <div class="menu">
@@ -32,13 +36,27 @@
     </div>
 
     <div class="barbeiros">
-      <h3>Barbeiros Cadastrados</h3>
+  <h3>Nossos Barbeiros</h3>
 
-      <div *ngFor="let barbeiro of barbeiros">
-        <strong>{{ barbeiro.name }}</strong>
-        <p>{{ barbeiro.specialty }}</p>
-      </div>
+  <div class="barbeiro-card" *ngFor="let barbeiro of barbeiros">
+
+    <div class="avatar">
+      💈
     </div>
+
+    <div class="info">
+      <h4>{{ barbeiro.name }}</h4>
+
+      <p>
+        <strong>Especialidade:</strong>
+        {{ barbeiro.specialty }}
+      </p>
+
+      <button>Agendar</button>
+    </div>
+
+  </div>
+</div>
 
   </div>
 </div>
