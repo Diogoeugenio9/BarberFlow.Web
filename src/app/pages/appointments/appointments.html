@@ -18,24 +18,51 @@
     <h1>Agendamentos</h1>
 
     <p class="welcome-text">
-      Em breve você poderá agendar um horário.
+      Escolha um barbeiro, um serviço e um horário para realizar seu agendamento.
     </p>
 
     <div class="appointment-card">
 
-      <div class="icon">
-        📅
-      </div>
+      <div class="form-agendamento">
 
-      <div class="info">
+        <label>Barber</label>
+        <select
+          id="barber"
+          [(ngModel)]="selectedBarberId">
+          <option selected disabled>
+            Selecione um barbeiro
+          </option>
+          <option *ngFor="let barbeiro of barbeiros" [value]="barbeiro.id">
+            {{ barbeiro.name }}
+          </option>
+       </select>
 
-        <h4>Você ainda não possui agendamentos.</h4>
 
-        <p>
-          Escolha um serviço para realizar seu primeiro agendamento.
-        </p>
+       <label>Serviço</label>
+        <select
+          id="service"
+          [(ngModel)]="selectedServiceId">
+          <option selected disabled>
+            Selecione um serviço
+          </option>
+          <option *ngFor="let service of services"
+                  [value]="service.id">
+            {{ service.name }}
+          </option>
+      </select>
 
-        <button>Novo Agendamento</button>
+
+        <label for="date">Data</label>
+        <input id="date" type="date">
+
+        <label for="time">Horário</label>
+        <input id="time" type="time">
+
+        <button
+          class="btn-confirmar"
+          (click)="confirmarAgendamento()">
+          Confirmar Agendamento
+        </button>
 
       </div>
 

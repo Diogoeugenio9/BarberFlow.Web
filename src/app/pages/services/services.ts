@@ -54,6 +54,10 @@ export class Services implements OnInit {
   this.router.navigate(['/home']);
 }
 
+irParaAppointments() {
+  this.router.navigate(['/appointments']);
+}
+
 
 
 }

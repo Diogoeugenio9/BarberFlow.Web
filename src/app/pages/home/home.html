@@ -29,7 +29,7 @@
       <h3>Menu</h3>
 
       <ul>
-        <li>✂️ Barbeiros</li>
+        <!-- <li>✂️ Barbeiros</li> -->
         <li (click)="irParaServices()">💈 Serviços</li>
         <li (click)="irParaAppointments()">📅 Agendamentos</li>
       </ul>
@@ -52,7 +52,7 @@
         {{ barbeiro.specialty }}
       </p>
 
-      <button>Agendar</button>
+      <button (click)="irParaServices()">Agendar</button>
     </div>
 
   </div>
