@@ -23,6 +23,9 @@ export class Appointments implements OnInit {
 
   selectedBarberId = '';
   selectedServiceId = '';
+  selectedDate = '';
+  selectedTime = '';
+
 
 
   ngOnInit(): void {
@@ -61,12 +64,33 @@ export class Appointments implements OnInit {
 
   confirmarAgendamento() {
 
+  if (!this.selectedBarberId) {
+    alert('Selecione um barbeiro.');
+    return;
+  }
+
+  if (!this.selectedServiceId) {
+    alert('Selecione um serviço.');
+    return;
+  }
+
+  if (!this.selectedDate) {
+    alert('Selecione uma data.');
+    return;
+  }
+
+  if (!this.selectedTime) {
+    alert('Selecione um horário.');
+    return;
+  }
+
   const appointment = {
-  barberId: this.selectedBarberId,
-  serviceId: this.selectedServiceId
-};
+    barberId: this.selectedBarberId,
+    serviceId: this.selectedServiceId,
+    date: this.selectedDate,
+    time: this.selectedTime
+  };
 
-console.log(appointment);
-
+  console.log(appointment);
 }
 }

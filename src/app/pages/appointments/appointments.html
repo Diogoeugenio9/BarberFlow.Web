@@ -25,14 +25,19 @@
 
       <div class="form-agendamento">
 
-        <label>Barber</label>
+        <label>Barbeiro</label>
         <select
           id="barber"
           [(ngModel)]="selectedBarberId">
-          <option selected disabled>
+
+          <option value="" disabled>
             Selecione um barbeiro
           </option>
-          <option *ngFor="let barbeiro of barbeiros" [value]="barbeiro.id">
+
+          <option
+          *ngFor="let barbeiro of barbeiros"
+          [value]="barbeiro.id">
+
             {{ barbeiro.name }}
           </option>
        </select>
@@ -42,21 +47,33 @@
         <select
           id="service"
           [(ngModel)]="selectedServiceId">
-          <option selected disabled>
+
+          <option value="" disabled>
             Selecione um serviço
           </option>
-          <option *ngFor="let service of services"
-                  [value]="service.id">
+
+          <option
+           *ngFor="let service of services"
+            [value]="service.id">
+
             {{ service.name }}
           </option>
       </select>
 
 
         <label for="date">Data</label>
-        <input id="date" type="date">
+        <input
+          id="date"
+          type="date"
+          [(ngModel)]="selectedDate">
+
+
 
         <label for="time">Horário</label>
-        <input id="time" type="time">
+        <input
+          id="time"
+          type="time"
+          [(ngModel)]="selectedTime">
 
         <button
           class="btn-confirmar"
