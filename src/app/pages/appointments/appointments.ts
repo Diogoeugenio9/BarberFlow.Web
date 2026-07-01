@@ -1,9 +1,8 @@
-import { Component, inject, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-appointments',
@@ -15,8 +14,9 @@ import { FormsModule } from '@angular/forms';
 export class Appointments implements OnInit {
 
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
-  private cdr = inject(ChangeDetectorRef); //injetar ChangeDetectorRef para controlar detcçao de mudanças
+  private cdr = inject(ChangeDetectorRef);
 
   barbeiros: any[] = [];
   services: any[] = [];
@@ -26,37 +26,45 @@ export class Appointments implements OnInit {
   selectedDate = '';
   selectedTime = '';
 
-
-
   ngOnInit(): void {
 
-  this.http.get('https://localhost:7134/api/Barbers').subscribe({
+    this.http.get('https://localhost:7134/api/Barbers').subscribe({
 
-    next: (response: any) => {
-      this.barbeiros = response;
-      this.cdr.detectChanges(); // Forçar atualizaçao
-    },
+      next: (response: any) => {
+        this.barbeiros = response;
+        this.cdr.detectChanges();
+      },
 
-    error: (error) => {
-      console.log('Erro ao carregar barbeiros:', error);
-    }
+      error: (error) => {
+        console.log('Erro ao carregar barbeiros:', error);
+      }
 
-  });
+    });
 
-  this.http.get('https://localhost:7134/api/Services').subscribe({
-  next: (response: any) => {
-    this.services = response;
-    this.cdr.detectChanges();
 
-  },
+    this.http.get('https://localhost:7134/api/Services').subscribe({
 
-  error: (error) => {
-    console.log('Erro ao carregar serviços:', error);
+      next: (response: any) => {
+        this.services = response;
+        this.cdr.detectChanges();
+      },
+
+      error: (error) => {
+        console.log('Erro ao carregar serviços:', error);
+      }
+
+    });
+
+    // verifica se veio um serviceId pela URL
+    this.route.queryParams.subscribe(params => {
+
+      if (params['serviceId']) {
+        this.selectedServiceId = params['serviceId'];
+      }
+
+    });
+
   }
-
-});
-
-}
 
   voltar() {
     this.router.navigate(['/home']);
@@ -64,62 +72,66 @@ export class Appointments implements OnInit {
 
   confirmarAgendamento() {
 
-  if (!this.selectedBarberId) {
-    alert('Selecione um barbeiro.');
-    return;
-  }
-
-  if (!this.selectedServiceId) {
-    alert('Selecione um serviço.');
-    return;
-  }
-
-  if (!this.selectedDate) {
-    alert('Selecione uma data.');
-    return;
-  }
-
-  if (!this.selectedTime) {
-    alert('Selecione um horário.');
-    return;
-  }
-
-  const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
-
-const appointment = {
-  clientName: "Diogo",
-  appointmentDate: appointmentDate,
-  barberId: this.selectedBarberId,
-  serviceId: this.selectedServiceId
-};
-
-const token = localStorage.getItem('token');
-
-this.http.post(
-  'https://localhost:7134/api/Appointments',
-  appointment,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
+    if (!this.selectedBarberId) {
+      alert('Selecione um barbeiro.');
+      return;
     }
+
+    if (!this.selectedServiceId) {
+      alert('Selecione um serviço.');
+      return;
+    }
+
+    if (!this.selectedDate) {
+      alert('Selecione uma data.');
+      return;
+    }
+
+    if (!this.selectedTime) {
+      alert('Selecione um horário.');
+      return;
+    }
+
+    const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
+
+    const appointment = {
+      clientName: 'Diogo',
+      appointmentDate: appointmentDate,
+      barberId: this.selectedBarberId,
+      serviceId: this.selectedServiceId
+    };
+
+    const token = localStorage.getItem('token');
+
+    this.http.post(
+      'https://localhost:7134/api/Appointments',
+      appointment,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).subscribe({
+
+      next: (response) => {
+        console.log(response);
+        alert('Agendamento realizado com sucesso!');
+
+        this.selectedBarberId = '';
+        this.selectedServiceId = '';
+        this.selectedDate = '';
+        this.selectedTime = '';
+
+        this.router.navigate(['/home']);
+      },
+
+      error: (error) => {
+        console.error(error);
+        alert('Erro ao realizar agendamento.');
+      }
+
+    });
+
   }
-).subscribe({
-  next: (response) => {
-    console.log(response);
-    alert('Agendamento realizado com sucesso!');
 
-    this.selectedBarberId = '';
-    this.selectedServiceId = '';
-    this.selectedDate = '';
-    this.selectedTime = '';
-
-    this.router.navigate(['/home'])
-  },
-
-  error: (error) => {
-    console.error(error);
-    alert('Erro ao realizar agendamento.');
-  }
-});
-}
 }

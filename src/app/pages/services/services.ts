@@ -54,8 +54,15 @@ export class Services implements OnInit {
   this.router.navigate(['/home']);
 }
 
-irParaAppointments() {
-  this.router.navigate(['/appointments']);
+irParaAppointments(serviceId: string) {
+  this.router.navigate(
+    ['/appointments'],
+    {
+      queryParams: {
+        serviceId: serviceId
+      }
+    }
+  );
 }
 
 
