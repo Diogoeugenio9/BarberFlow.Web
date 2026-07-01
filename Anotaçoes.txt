@@ -1,0 +1,17 @@
+atalhos
+ctrl + r + r = renomeiar aonde esta selecionado
+selecionar e segurar alt da para mover trechosd e codigos
+erros de atulizar a pagina e sumir os dados, se ressolve no typescript com adiçaode 
+ChangeDetectorRef no import
+private cdr = inject(ChangeDetectorRef); no export
+this.cdr.detectChanges(); no next
+
+
+
+comandos usados e trajetos para criaçao de telas
+ng g c pages/appointments = criar a pasta com as class
+
+
+git add .
+git commit -m "feat: implementa formulario de agendamento"
+git push

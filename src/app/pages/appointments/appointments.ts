@@ -84,13 +84,42 @@ export class Appointments implements OnInit {
     return;
   }
 
-  const appointment = {
-    barberId: this.selectedBarberId,
-    serviceId: this.selectedServiceId,
-    date: this.selectedDate,
-    time: this.selectedTime
-  };
+  const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
 
-  console.log(appointment);
+const appointment = {
+  clientName: "Diogo",
+  appointmentDate: appointmentDate,
+  barberId: this.selectedBarberId,
+  serviceId: this.selectedServiceId
+};
+
+const token = localStorage.getItem('token');
+
+this.http.post(
+  'https://localhost:7134/api/Appointments',
+  appointment,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+).subscribe({
+  next: (response) => {
+    console.log(response);
+    alert('Agendamento realizado com sucesso!');
+
+    this.selectedBarberId = '';
+    this.selectedServiceId = '';
+    this.selectedDate = '';
+    this.selectedTime = '';
+
+    this.router.navigate(['/home'])
+  },
+
+  error: (error) => {
+    console.error(error);
+    alert('Erro ao realizar agendamento.');
+  }
+});
 }
 }
