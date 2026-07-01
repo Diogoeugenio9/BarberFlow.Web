@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
+
   private router = inject(Router);
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
@@ -19,46 +20,60 @@ export class Home implements OnInit {
   carregando = true;
 
   ngOnInit(): void {
+
     this.http.get('https://localhost:7134/api/Barbers').subscribe({
+
       next: (response: any) => {
         this.barbeiros = [...response];
         this.carregando = false;
         this.cdr.detectChanges();
       },
+
       error: (error) => {
         this.carregando = false;
         console.log('Erro ao carregar barbeiros:', error);
       }
+
     });
+
   }
 
   isLoggedIn(): boolean {
-  return !!localStorage.getItem('token');
-}
-logout() {
-  localStorage.removeItem('token');
-  this.router.navigate(['/login']);
-}
+    return !!localStorage.getItem('token');
+  }
 
-irParaLogin() {
-  this.router.navigate(['/login']);
-}
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  irParaLogin() {
+    this.router.navigate(['/login']);
+  }
 
   irParaCadastro() {
     this.router.navigate(['/register']);
   }
 
-  irParaServices() {
-  this.router.navigate(['/services']);
-}
+  irParaServices(barberId?: string) {
 
-irParaAppointments() {
-  this.router.navigate(['/appointments']);
-}
+    if (barberId) {
+      this.router.navigate(
+        ['/appointments'],
+        {
+          queryParams: {
+            barberId: barberId
+          }
+        }
+      );
+    } else {
+      this.router.navigate(['/services']);
+    }
 
+  }
 
-
-
-
+  irParaAppointments() {
+    this.router.navigate(['/appointments']);
+  }
 
 }

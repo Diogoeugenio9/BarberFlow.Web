@@ -62,6 +62,10 @@ export class Appointments implements OnInit {
         this.selectedServiceId = params['serviceId'];
       }
 
+      if (params['barberId']) {
+         this.selectedBarberId = params['barberId'];
+      }
+
     });
 
   }
