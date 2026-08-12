@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { Auth } from '../../services/auth';
+
 @Component({
   selector: 'app-appointments',
   standalone: true,
@@ -17,6 +19,7 @@ export class Appointments implements OnInit {
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
+  private auth = inject(Auth);
 
   barbeiros: any[] = [];
   services: any[] = [];
@@ -98,8 +101,11 @@ export class Appointments implements OnInit {
 
     const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
 
+    const userName = this.auth.getUserName();
+    console.log(userName);
+
     const appointment = {
-      clientName: 'Diogo',
+      clientName: userName,
       appointmentDate: appointmentDate,
       barberId: this.selectedBarberId,
       serviceId: this.selectedServiceId
