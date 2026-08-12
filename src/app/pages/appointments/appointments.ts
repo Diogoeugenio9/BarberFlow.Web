@@ -102,7 +102,6 @@ export class Appointments implements OnInit {
     const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
 
     const userName = this.auth.getUserName();
-    console.log(userName);
 
     const appointment = {
       clientName: userName,

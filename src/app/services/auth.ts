@@ -31,7 +31,6 @@ export class Auth {
     }
 
     const decoded = jwtDecode<JwtPayload>(token);
-    console.log(decoded)
 
     const userName = decoded.unique_name;
 
