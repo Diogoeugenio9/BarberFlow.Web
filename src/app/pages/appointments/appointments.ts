@@ -23,6 +23,7 @@ export class Appointments implements OnInit {
 
   barbeiros: any[] = [];
   services: any[] = [];
+  horarios: string[] = [];
 
   selectedBarberId = '';
   selectedServiceId = '';
@@ -58,7 +59,7 @@ export class Appointments implements OnInit {
 
     });
 
-    // verifica se veio um serviceId pela URL
+
     this.route.queryParams.subscribe(params => {
 
       if (params['serviceId']) {
@@ -72,6 +73,27 @@ export class Appointments implements OnInit {
     });
 
   }
+
+  buscarHorariosDisponiveis() {
+  if (!this.selectedBarberId || !this.selectedDate) {
+    return;
+  }
+
+  this.http.get(
+    `https://localhost:7134/api/Appointments/available?barberId=${this.selectedBarberId}&date=${this.selectedDate}`
+  ).subscribe({
+
+    next: (response: any) => {
+      this.horarios = response;
+      this.cdr.detectChanges();
+    },
+
+    error: (error) => {
+      console.log('Erro ao carregar horários:', error);
+    }
+
+  });
+}
 
   voltar() {
     this.router.navigate(['/home']);
@@ -99,7 +121,7 @@ export class Appointments implements OnInit {
       return;
     }
 
-    const appointmentDate = `${this.selectedDate}T${this.selectedTime}:00`;
+    const appointmentDate = `${this.selectedDate}T${this.selectedTime}`;
 
     const userName = this.auth.getUserName();
 

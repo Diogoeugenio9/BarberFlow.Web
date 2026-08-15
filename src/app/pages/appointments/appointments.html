@@ -65,15 +65,24 @@
         <input
           id="date"
           type="date"
-          [(ngModel)]="selectedDate">
-
+          [(ngModel)]="selectedDate"
+          (change)="buscarHorariosDisponiveis()">
 
 
         <label for="time">Horário</label>
-        <input
+        <select
           id="time"
-          type="time"
           [(ngModel)]="selectedTime">
+
+          <option value="">Selecione um horário</option>
+
+          <option
+            *ngFor="let horario of horarios"
+            [value]="horario">
+            {{ horario }}
+          </option>
+
+        </select>
 
         <button
           class="btn-confirmar"
