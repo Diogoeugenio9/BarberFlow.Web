@@ -4,6 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <div class="container">
+
   <div class="card">
 
     <div class="logo">
@@ -12,63 +13,128 @@
 
     <h1>Bem-vindo 👋</h1>
 
-    <p class="welcome-text">
-      <!-- Gerencie sua barbearia de forma simples e organizada. -->
-    </p>
+    <p class="welcome-text"></p>
+
+    <div class="buttons" *ngIf="isLoggedIn()">
+      <button (click)="logout()">Sair</button>
+    </div>
 
     <div class="buttons" *ngIf="!isLoggedIn()">
       <button (click)="irParaLogin()">Login</button>
       <button (click)="irParaCadastro()">Cadastro</button>
     </div>
 
-    <div class="buttons" *ngIf="isLoggedIn()">
-      <button (click)="logout()">Sair</button>
-    </div>
-
     <div class="menu">
+
       <h3>Menu</h3>
 
       <ul>
-        <!-- <li>✂️ Barbeiros</li> -->
-        <li (click)="irParaServices()">💈 Serviços</li>
-        <li (click)="irParaAppointments()">📅 Agendamentos</li>
+
+        <li (click)="irParaServices()">
+          💈 Serviços
+        </li>
+
+        <li (click)="irParaAppointments()">
+          📅 Agendamentos
+        </li>
+
       </ul>
+
     </div>
 
-    <div class="barbeiros">
-  <h3>Nossos Barbeiros</h3>
+    <div class="agendamento">
 
-  <div class="barbeiro-card" *ngFor="let barbeiro of barbeiros">
+      <div class="agendamento-header">
 
-    <div class="avatar">
-      💈
-    </div>
+        <div class="avatar">
+          👤
+        </div>
 
-    <div class="info">
-      <h4>{{ barbeiro.name }}</h4>
+        <div>
 
-      <p>
-        <strong>Especialidade:</strong>
-        {{ barbeiro.specialty }}
+          <h2>Olá!</h2>
+
+          <p>
+            Aqui está seu próximo agendamento:
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="detalhes-agendamento">
+
+        <div class="detalhe">
+
+          <span class="icone">
+            📅
+          </span>
+
+          <div>
+            <span class="label">
+              Data
+            </span>
+
+            <span class="valor">
+              03/06/2025
+            </span>
+          </div>
+
+        </div>
+
+        <div class="detalhe">
+
+          <span class="icone">
+            🕐
+          </span>
+
+          <div>
+            <span class="label">
+              Horário
+            </span>
+
+            <span class="valor">
+              15:00
+            </span>
+          </div>
+
+        </div>
+
+        <div class="detalhe">
+
+          <span class="icone">
+            ✂️
+          </span>
+
+          <div>
+            <span class="label">
+              Serviço
+            </span>
+
+            <span class="valor">
+              Corte Degrade
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <p class="info-text">
+        ⓘ Seus agendamentos podem ser gerenciados na
+        <strong>página de agendamentos.</strong>
       </p>
 
-      <button (click)="irParaServices(barbeiro.id)">
-  Agendar
-</button>
+      <button
+        class="btn-agendamentos"
+        (click)="irParaAppointments()">
+
+        Ver meus agendamentos
+
+      </button>
+
     </div>
 
   </div>
+
 </div>
-
-  </div>
-</div>
-
-<!-- <div>
-  <h1>TESTE HOME</h1>
-  <p>Total: {{ barbeiros.length }}</p>
-  <pre>{{ barbeiros | json }}</pre>
-  <div *ngFor="let barbeiro of barbeiros">
-    <h3>{{ barbeiro.name }}</h3>
-  </div>
-</div> -->
-

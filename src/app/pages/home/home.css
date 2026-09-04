@@ -1,160 +1,259 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-  width:100%;
-  height:100vh;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  background:#0d6efd;
-}
-
-.card{
-  width:450px;
-  padding:40px;
-
-  display:flex;
-  flex-direction:column;
-
-  background:rgba(255,255,255,0.15);
-  border-radius:25px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 8px 32px rgba(0,0,0,0.2);
-}
-
-.logo{
-  text-align:center;
-  margin-bottom:25px;
-
-  color:white;
-  font-family:"Black Ops One", system-ui;
-  font-size:40px;
-}
-
-h1{
-  color:white;
-  text-align:center;
-  margin-bottom:15px;
-
-  font-family:"Black Ops One", system-ui;
-  font-size:28px;
-}
-
-.barbeiros{
-  color:white;
-  margin-bottom:30px;
-  font-family: "Roboto", sans-serif;
-}
-
-.barbeiros h3{
-  margin-bottom: 20px;
-  color: white;
-}
-
-.barbeiro-card {
+.container {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 15px;
-  transition: 0.3s;
+  background: #0d6efd;
+  padding: 30px 20px;
 }
-.barbeiro-card:hover {
-  transform: translateY(-3px);
-  background: rgba(255,255,255,0.18);
+
+.card {
+  width: 100%;
+  max-width: 680px;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-.avatar {
+
+.logo {
+  text-align: center;
+  margin-bottom: 25px;
+  color: white;
+  font-family: "Black Ops One", system-ui;
   font-size: 40px;
 }
 
-.info {
+h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: "Black Ops One", system-ui;
+  font-size: 28px;
+}
+
+.welcome-text {
+  text-align: center;
+  color: white;
+  margin-bottom: 25px;
+  font-family: "Roboto", sans-serif;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+.buttons button {
   flex: 1;
 }
 
-.info h4 {
-  margin: 0;
-  color: white;
-}
-
-.info p {
-  margin: 8px 0 15px;
-  color: white;
-}
-
-.info button {
-  background: #003f91;
-  color: white;
+button {
+  height: 45px;
   border: none;
-  padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: #003f88;
+  color: white;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #002f66;
+}
+
+.menu {
+  margin-bottom: 30px;
+}
+
+.menu h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.menu ul {
+  list-style: none;
+}
+
+.menu li {
+  color: white;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu li:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(2px);
+}
+
+.agendamento {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 28px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.agendamento-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #003f88;
+  font-size: 30px;
+}
+
+.agendamento-header h2 {
+  color: white;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+.agendamento-header p {
+  color: white;
   font-size: 15px;
 }
 
-.info button:hover {
-  background: #002d68;
+.detalhes-agendamento {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  margin-bottom: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
 }
 
-.welcome-text{
-  text-align:center;
-  color:white;
-  margin-bottom:25px;
-
-  font-family:"Roboto", sans-serif;
+.detalhe {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.buttons{
-  display:flex;
-  gap:10px;
-  margin-bottom:30px;
-  font-size: 15px;
+.icone {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #075ce0;
+  font-size: 17px;
 }
 
-.buttons button{
-  flex:1;
+.label {
+  display: block;
+  margin-bottom: 4px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-button{
-  height:45px;
-  border:none;
-  border-radius:10px;
-  background:#003f88;
-  color:white;
-  cursor:pointer;
-
-  font-family:"Roboto", sans-serif;
+.valor {
+  display: block;
+  color: white;
+  font-size: 14px;
 }
 
-button:hover{
-  background:#002f66;
+.info-text {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-.menu h3{
-  color:white;
-  margin-bottom:15px;
-
-  font-family:"Roboto", sans-serif;
+.info-text strong {
+  font-weight: bold;
 }
 
-.menu ul{
-  list-style:none;
+.btn-agendamentos {
+  width: auto;
+  padding: 0 22px;
 }
 
-.menu li{
-  color:white;
-  padding:10px;
-  margin-bottom:10px;
+@media (max-width: 700px) {
+  .container {
+    padding: 20px 10px;
+    align-items: flex-start;
+  }
 
-  border-radius:10px;
-  background:rgba(255,255,255,0.1);
+  .card {
+    max-width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
 
-  font-family:"Roboto", sans-serif;
+  .logo {
+    font-size: 34px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .agendamento {
+    padding: 22px;
+  }
+
+  .detalhes-agendamento {
+    flex-direction: column;
+  }
+
+  .detalhe {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 29px;
+  }
+
+  .card {
+    padding: 25px 15px;
+  }
+
+  .agendamento {
+    padding: 18px;
+  }
+
+  .agendamento-header h2 {
+    font-size: 21px;
+  }
+
+  .agendamento-header p {
+    font-size: 13px;
+  }
 }
