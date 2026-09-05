@@ -1,0 +1,79 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<div class="container">
+
+  <div class="card">
+
+    <button class="btn-voltar" (click)="voltar()">
+      ← Voltar
+    </button>
+
+    <div class="logo">
+      BarberFlow
+    </div>
+
+    <h1>Meus Agendamentos</h1>
+
+    <p class="welcome-text">
+      Confira seus próximos agendamentos.
+    </p>
+
+    <div class="lista">
+
+      <div class="carregando" *ngIf="carregando">
+        Carregando agendamentos...
+      </div>
+
+      <div class="sem-agendamentos" *ngIf="!carregando && agendamentos.length === 0">
+        <h2>Nenhum agendamento</h2>
+        <p>Você ainda não possui agendamentos.</p>
+      </div>
+
+      <div
+        class="appointment-card"
+        *ngFor="let agendamento of agendamentos">
+
+        <div class="appointment-header">
+
+          <h2>{{ agendamento.serviceName }}</h2>
+
+          <span>
+            💈 {{ agendamento.barberName }}
+          </span>
+
+        </div>
+
+        <div class="detalhes">
+
+          <div class="detalhe">
+            <span>📅</span>
+            <div>
+              <strong>Data</strong>
+              <p>{{ agendamento.appointmentDate | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </div>
+
+          <div class="detalhe">
+            <span>🕐</span>
+            <div>
+              <strong>Horário</strong>
+              <p>{{ agendamento.appointmentDate | date:'HH:mm' }}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button class="btn-novo" (click)="novoAgendamento()">
+      + Novo Agendamento
+    </button>
+
+  </div>
+
+</div>

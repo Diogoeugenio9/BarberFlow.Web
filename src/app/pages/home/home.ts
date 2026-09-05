@@ -16,26 +16,39 @@ export class Home implements OnInit {
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
 
-  barbeiros: any[] = [];
+  proximoAgendamento: any = null;
   carregando = true;
 
   ngOnInit(): void {
+    this.carregarAgendamento();
+  }
 
-    this.http.get('https://localhost:7134/api/Barbers').subscribe({
 
-      next: (response: any) => {
-        this.barbeiros = [...response];
+  carregarAgendamento(): void {
+    this.http.get<any[]>('https://localhost:7134/api/Appointments').subscribe({
+      next: (response) => {
+        const agora = new Date();
+
+        const agendamentosFuturos = response
+          .filter(agendamento => new Date(agendamento.appointmentDate) >= agora)
+          .sort(
+            (a, b) =>
+              new Date(a.appointmentDate).getTime() -
+              new Date(b.appointmentDate).getTime()
+          );
+
+        this.proximoAgendamento = agendamentosFuturos.length > 0
+          ? agendamentosFuturos[0]
+          : null;
+
         this.carregando = false;
         this.cdr.detectChanges();
       },
-
       error: (error) => {
         this.carregando = false;
-        console.log('Erro ao carregar barbeiros:', error);
+        console.log('Erro ao carregar agendamento:', error);
       }
-
     });
-
   }
 
   isLoggedIn(): boolean {
@@ -55,25 +68,15 @@ export class Home implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  irParaServices(barberId?: string) {
-
-    if (barberId) {
-      this.router.navigate(
-        ['/appointments'],
-        {
-          queryParams: {
-            barberId: barberId
-          }
-        }
-      );
-    } else {
-      this.router.navigate(['/services']);
-    }
-
+  irParaServices() {
+    this.router.navigate(['/services']);
   }
 
   irParaAppointments() {
     this.router.navigate(['/appointments']);
   }
 
+  irParaNovoAgendamento() {
+  this.router.navigate(['/appointments/new']);
+}
 }

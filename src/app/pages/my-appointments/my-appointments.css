@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d6efd;
+  padding: 30px 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 780px;
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.btn-voltar {
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 8px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+.logo {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0d6efd;
+  font-family: "Black Ops One", system-ui;
+  font-size: 38px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Black Ops One", system-ui;
+  font-size: 28px;
+}
+
+.welcome-text {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #666;
+  font-family: "Roboto", sans-serif;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.appointment-card {
+  padding: 22px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  font-family: "Roboto", sans-serif;
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.appointment-header h2 {
+  color: #003f88;
+  font-size: 20px;
+}
+
+.appointment-header span {
+  color: #555;
+}
+
+.detalhes {
+  display: flex;
+  gap: 20px;
+}
+
+.detalhe {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.detalhe > span {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #0d6efd;
+  font-size: 18px;
+}
+
+.detalhe strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+.detalhe p {
+  color: #555;
+  font-size: 14px;
+}
+
+.carregando,
+.sem-agendamentos {
+  padding: 30px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.sem-agendamentos h2 {
+  margin-bottom: 10px;
+}
+
+.sem-agendamentos p {
+  color: #666;
+}
+
+.btn-novo {
+  width: 100%;
+  height: 45px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 10px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.btn-novo:hover,
+.btn-voltar:hover {
+  background: #003f88;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 25px 20px;
+  }
+
+  .appointment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detalhes {
+    flex-direction: column;
+  }
+}

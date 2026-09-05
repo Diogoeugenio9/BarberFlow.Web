@@ -96,9 +96,13 @@ export class Appointments implements OnInit {
 }
 
   voltar() {
-    this.router.navigate(['/home']);
+  if (this.route.snapshot.queryParams['serviceId']) {
+    this.router.navigate(['/services']);
+    return;
   }
 
+  this.router.navigate(['/appointments']);
+}
   confirmarAgendamento() {
 
     if (!this.selectedBarberId) {

@@ -42,7 +42,7 @@
 
     </div>
 
-    <div class="agendamento">
+    <div class="agendamento" *ngIf="!carregando && proximoAgendamento">
 
       <div class="agendamento-header">
 
@@ -71,13 +71,15 @@
           </span>
 
           <div>
+
             <span class="label">
               Data
             </span>
 
             <span class="valor">
-              03/06/2025
+              {{ proximoAgendamento.appointmentDate | date:'dd/MM/yyyy' }}
             </span>
+
           </div>
 
         </div>
@@ -89,13 +91,15 @@
           </span>
 
           <div>
+
             <span class="label">
               Horário
             </span>
 
             <span class="valor">
-              15:00
+              {{ proximoAgendamento.appointmentDate | date:'HH:mm' }}
             </span>
+
           </div>
 
         </div>
@@ -107,13 +111,15 @@
           </span>
 
           <div>
+
             <span class="label">
               Serviço
             </span>
 
             <span class="valor">
-              Corte Degrade
+              {{ proximoAgendamento.serviceName }}
             </span>
+
           </div>
 
         </div>
@@ -130,6 +136,36 @@
         (click)="irParaAppointments()">
 
         Ver meus agendamentos
+
+      </button>
+
+    </div>
+
+    <div class="agendamento" *ngIf="!carregando && !proximoAgendamento">
+
+      <div class="agendamento-header">
+
+        <div class="avatar">
+          📅
+        </div>
+
+        <div>
+
+          <h2>Nenhum agendamento</h2>
+
+          <p>
+            Você ainda não possui próximos agendamentos.
+          </p>
+
+        </div>
+
+      </div>
+
+      <button
+        class="btn-agendamentos"
+        (click)="irParaNovoAgendamento()">
+
+        Fazer um agendamento
 
       </button>
 

@@ -56,7 +56,7 @@ export class Services implements OnInit {
 
 irParaAppointments(serviceId: string) {
   this.router.navigate(
-    ['/appointments'],
+    ['/appointments/new'],
     {
       queryParams: {
         serviceId: serviceId

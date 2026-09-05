@@ -4,6 +4,7 @@ import { Register } from './pages/register/register';
 import { Home } from './pages/home/home';
 import { Services } from './pages/services/services';
 import { Appointments } from './pages/appointments/appointments';
+import { MyAppointments } from './pages/my-appointments/my-appointments';
 
 export const routes: Routes = [
   {
@@ -28,9 +29,13 @@ export const routes: Routes = [
     component: Services
   },
   {
-    path: 'appointments',
-    component: Appointments
-  }
+  path: 'appointments',
+  component: MyAppointments
+},
+{
+  path: 'appointments/new',
+  component: Appointments
+}
 
 
 
