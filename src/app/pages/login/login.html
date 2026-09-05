@@ -1,12 +1,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <div class="container">
+
   <div class="card">
 
     <h2 class="logo">BarberFlow</h2>
@@ -14,26 +12,39 @@
     <h1>Login</h1>
 
     <label>Email</label>
+
     <input
       type="email"
       placeholder="Digite seu email"
-      [(ngModel)] = "email">
+      [(ngModel)]="email">
 
     <label>Password</label>
+
     <input
       type="password"
       placeholder="Digite sua senha"
-      [(ngModel)] = "senha">
+      [(ngModel)]="senha">
 
     <a href="#">Esqueceu sua senha?</a>
 
-    <button (click)="login()">Sign in</button>
+    <button
+      (click)="login()"
+      [disabled]="carregando">
 
+      <span *ngIf="!carregando">Sign in</span>
+      <span *ngIf="carregando">Entrando...</span>
+
+    </button>
+
+    <p class="erro" *ngIf="erro">
+      {{ erro }}
+    </p>
 
     <p class="register">
       Não possui conta?
-      <a class='link-destaque' href="/register">Cadastre-se</a>
+      <a class="link-destaque" href="/register">Cadastre-se</a>
     </p>
 
   </div>
+
 </div>

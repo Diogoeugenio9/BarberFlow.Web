@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { Auth } from '../../services/auth';
 
 @Component({
@@ -14,7 +13,6 @@ import { Auth } from '../../services/auth';
   styleUrl: './appointments.css',
 })
 export class Appointments implements OnInit {
-
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
@@ -31,80 +29,95 @@ export class Appointments implements OnInit {
   selectedTime = '';
 
   ngOnInit(): void {
-
     this.http.get('https://localhost:7134/api/Barbers').subscribe({
-
       next: (response: any) => {
         this.barbeiros = response;
         this.cdr.detectChanges();
       },
-
       error: (error) => {
         console.log('Erro ao carregar barbeiros:', error);
       }
-
     });
 
-
     this.http.get('https://localhost:7134/api/Services').subscribe({
-
       next: (response: any) => {
         this.services = response;
         this.cdr.detectChanges();
       },
-
       error: (error) => {
         console.log('Erro ao carregar serviços:', error);
       }
-
     });
 
-
     this.route.queryParams.subscribe(params => {
-
       if (params['serviceId']) {
         this.selectedServiceId = params['serviceId'];
       }
 
       if (params['barberId']) {
-         this.selectedBarberId = params['barberId'];
+        this.selectedBarberId = params['barberId'];
       }
 
+      if (this.selectedBarberId && this.selectedDate) {
+        this.buscarHorariosDisponiveis();
+      }
     });
-
   }
 
-  buscarHorariosDisponiveis() {
-  if (!this.selectedBarberId || !this.selectedDate) {
-    return;
-  }
+  buscarHorariosDisponiveis(): void {
+    this.selectedTime = '';
 
-  this.http.get(
-    `https://localhost:7134/api/Appointments/available?barberId=${this.selectedBarberId}&date=${this.selectedDate}`
-  ).subscribe({
-
-    next: (response: any) => {
-      this.horarios = response;
-      this.cdr.detectChanges();
-    },
-
-    error: (error) => {
-      console.log('Erro ao carregar horários:', error);
+    if (!this.selectedBarberId || !this.selectedDate) {
+      this.horarios = [];
+      return;
     }
 
-  });
-}
+    this.http.get<string[]>(
+      `https://localhost:7134/api/Appointments/available?barberId=${this.selectedBarberId}&date=${this.selectedDate}`
+    ).subscribe({
+      next: (response) => {
+        let horariosDisponiveis = response.map(horario =>
+          horario.substring(0, 5)
+        );
 
-  voltar() {
-  if (this.route.snapshot.queryParams['serviceId']) {
-    this.router.navigate(['/services']);
-    return;
+        const hoje = new Date();
+        const dataSelecionada = new Date(`${this.selectedDate}T00:00:00`);
+
+        if (
+          dataSelecionada.getFullYear() === hoje.getFullYear() &&
+          dataSelecionada.getMonth() === hoje.getMonth() &&
+          dataSelecionada.getDate() === hoje.getDate()
+        ) {
+          const horarioAtual = hoje.getHours() * 60 + hoje.getMinutes();
+
+          horariosDisponiveis = horariosDisponiveis.filter(horario => {
+            const [hora, minuto] = horario.split(':').map(Number);
+            const horarioEmMinutos = hora * 60 + minuto;
+
+            return horarioEmMinutos > horarioAtual;
+          });
+        }
+
+        this.horarios = horariosDisponiveis;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        this.horarios = [];
+        console.log('Erro ao carregar horários:', error);
+      }
+    });
   }
 
-  this.router.navigate(['/appointments']);
-}
-  confirmarAgendamento() {
+  voltar(): void {
+    if (this.route.snapshot.queryParams['serviceId']) {
+      this.router.navigate(['/services']);
+      return;
+    }
 
+    this.router.navigate(['/appointments']);
+  }
+
+  confirmarAgendamento(): void {
     if (!this.selectedBarberId) {
       alert('Selecione um barbeiro.');
       return;
@@ -147,7 +160,6 @@ export class Appointments implements OnInit {
         }
       }
     ).subscribe({
-
       next: (response) => {
         console.log(response);
         alert('Agendamento realizado com sucesso!');
@@ -156,17 +168,14 @@ export class Appointments implements OnInit {
         this.selectedServiceId = '';
         this.selectedDate = '';
         this.selectedTime = '';
+        this.horarios = [];
 
         this.router.navigate(['/home']);
       },
-
       error: (error) => {
         console.error(error);
         alert('Erro ao realizar agendamento.');
       }
-
     });
-
   }
-
 }

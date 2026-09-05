@@ -28,19 +28,18 @@
         <label>Barbeiro</label>
         <select
           id="barber"
-          [(ngModel)]="selectedBarberId">
-
+          [(ngModel)]="selectedBarberId"
+          (change)="buscarHorariosDisponiveis()">
           <option value="" disabled>
             Selecione um barbeiro
           </option>
 
           <option
-          *ngFor="let barbeiro of barbeiros"
-          [value]="barbeiro.id">
-
+            *ngFor="let barbeiro of barbeiros"
+            [value]="barbeiro.id">
             {{ barbeiro.name }}
           </option>
-       </select>
+        </select>
 
 
        <label>Serviço</label>
