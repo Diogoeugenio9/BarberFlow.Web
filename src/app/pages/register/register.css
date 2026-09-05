@@ -1,98 +1,200 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-  width:100%;
-  height:100vh;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  background:#0d6efd;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d6efd;
+  padding: 30px 20px;
 }
 
-.card{
-  width:400px;
-  padding:40px;
-  display:flex;
-  flex-direction:column;
-
-  background:rgba(255,255,255,0.15);
-  border-radius:25px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+.card {
+  width: 400px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-.logo{
-  text-align:center;
-  margin-bottom:30px;
-
-  color:white;
-  font-family:"Black Ops One", system-ui;
-  font-size:40px;
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+  font-family: "Black Ops One", system-ui;
+  font-size: 40px;
 }
 
-h1{
-  color:white;
-  margin-bottom:20px;
-
-  font-family:"Black Ops One", system-ui;
-  font-size:30px;
+h1 {
+  color: white;
+  margin-bottom: 20px;
+  font-family: "Black Ops One", system-ui;
+  font-size: 30px;
 }
 
-label{
-  color:white;
-  margin-bottom:5px;
-
-  font-family:"Roboto", sans-serif;
+label {
+  color: white;
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
-input{
-  height:40px;
-  border:none;
-  border-radius:8px;
-  padding:10px;
-  margin-bottom:15px;
-
-  font-family:"Roboto", sans-serif;
+input {
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
 }
 
-button{
-  height:45px;
-  border:none;
-  border-radius:10px;
-
-  background:#003f88;
-  color:white;
-  cursor:pointer;
-
-  margin-top:10px;
-  margin-bottom:20px;
-
-  font-family:"Roboto", sans-serif;
+input:focus {
+  outline: none;
 }
 
-button:hover{
-  background:#002f66;
+input.input-erro {
+  border: 2px solid #dc3545;
 }
 
-.register{
-  text-align:center;
-  color:white;
-
-  font-family:"Roboto", sans-serif;
+.erro-campo {
+  margin-bottom: 10px;
+  color: #ffccd2;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.register a{
-  color:white;
-  text-decoration:none;
-  font-weight:500;
+button {
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background: #003f88;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
-.register a:hover{
-  text-decoration:underline;
+button:hover {
+  background: #002f66;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register {
+  text-align: center;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.register a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
+
+.notificacao {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  min-width: 320px;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: aparecer 0.3s ease;
+}
+
+.notificacao.sucesso {
+  border-left: 5px solid #198754;
+}
+
+.notificacao.erro {
+  border-left: 5px solid #dc3545;
+}
+
+.notificacao-icone {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.notificacao.sucesso .notificacao-icone {
+  background: #198754;
+}
+
+.notificacao.erro .notificacao-icone {
+  background: #dc3545;
+}
+
+.notificacao-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: "Roboto", sans-serif;
+}
+
+.notificacao-conteudo strong {
+  font-size: 15px;
+}
+
+.notificacao-conteudo span {
+  color: #666;
+  font-size: 14px;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 25px;
+  }
+
+  .notificacao {
+    left: 20px;
+    right: 20px;
+    min-width: auto;
+  }
 }

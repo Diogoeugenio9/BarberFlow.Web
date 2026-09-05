@@ -4,6 +4,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+<div
+  *ngIf="mensagem"
+  class="notificacao"
+  [ngClass]="tipoMensagem">
+
+  <div class="notificacao-icone">
+    <span *ngIf="tipoMensagem === 'sucesso'">✓</span>
+    <span *ngIf="tipoMensagem === 'erro'">!</span>
+  </div>
+
+  <div class="notificacao-conteudo">
+
+    <strong *ngIf="tipoMensagem === 'sucesso'">
+      Sucesso
+    </strong>
+
+    <strong *ngIf="tipoMensagem === 'erro'">
+      Atenção
+    </strong>
+
+    <span>
+      {{ mensagem }}
+    </span>
+
+  </div>
+
+</div>
+
+<div
+  *ngIf="mostrarModal"
+  class="modal-overlay">
+
+  <div class="modal">
+
+    <div class="modal-icone">
+      !
+    </div>
+
+    <h2>Cancelar agendamento?</h2>
+
+    <p>
+      Tem certeza que deseja cancelar este agendamento?
+    </p>
+
+    <div class="modal-botoes">
+
+      <button
+        class="btn-voltar-modal"
+        (click)="fecharModalCancelamento()">
+
+        Voltar
+
+      </button>
+
+      <button
+        class="btn-confirmar-cancelamento"
+        (click)="confirmarCancelamento()">
+
+        Confirmar cancelamento
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
 <div class="container">
 
   <div class="card">
@@ -105,7 +173,7 @@
         <button
           class="btn-cancelar"
           *ngIf="agendamento.status === 'Agendado'"
-          (click)="cancelarAgendamento(agendamento.id)">
+          (click)="abrirModalCancelamento(agendamento.id)">
 
           Cancelar Agendamento
 

@@ -1,7 +1,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<div
+  *ngIf="mensagem"
+  class="notificacao"
+  [ngClass]="tipoMensagem">
+
+  <div class="notificacao-icone">
+    <span *ngIf="tipoMensagem === 'sucesso'">✓</span>
+    <span *ngIf="tipoMensagem === 'erro'">!</span>
+  </div>
+
+  <div class="notificacao-conteudo">
+    <strong *ngIf="tipoMensagem === 'sucesso'">
+      Sucesso
+    </strong>
+
+    <strong *ngIf="tipoMensagem === 'erro'">
+      Atenção
+    </strong>
+
+    <span>
+      {{ mensagem }}
+    </span>
+  </div>
+
+</div>
 
 <div class="container">
 
@@ -26,10 +53,12 @@
       <div class="form-agendamento">
 
         <label>Barbeiro</label>
+
         <select
           id="barber"
           [(ngModel)]="selectedBarberId"
           (change)="buscarHorariosDisponiveis()">
+
           <option value="" disabled>
             Selecione um barbeiro
           </option>
@@ -37,12 +66,15 @@
           <option
             *ngFor="let barbeiro of barbeiros"
             [value]="barbeiro.id">
+
             {{ barbeiro.name }}
+
           </option>
+
         </select>
 
+        <label>Serviço</label>
 
-       <label>Serviço</label>
         <select
           id="service"
           [(ngModel)]="selectedServiceId">
@@ -52,33 +84,43 @@
           </option>
 
           <option
-           *ngFor="let service of services"
+            *ngFor="let service of services"
             [value]="service.id">
 
             {{ service.name }}
+
           </option>
-      </select>
 
+        </select>
 
-        <label for="date">Data</label>
+        <label for="date">
+          Data
+        </label>
+
         <input
           id="date"
           type="date"
           [(ngModel)]="selectedDate"
           (change)="buscarHorariosDisponiveis()">
 
+        <label for="time">
+          Horário
+        </label>
 
-        <label for="time">Horário</label>
         <select
           id="time"
           [(ngModel)]="selectedTime">
 
-          <option value="">Selecione um horário</option>
+          <option value="">
+            Selecione um horário
+          </option>
 
           <option
             *ngFor="let horario of horarios"
             [value]="horario">
+
             {{ horario }}
+
           </option>
 
         </select>
@@ -86,7 +128,9 @@
         <button
           class="btn-confirmar"
           (click)="confirmarAgendamento()">
+
           Confirmar Agendamento
+
         </button>
 
       </div>

@@ -18,6 +18,12 @@ export class MyAppointments implements OnInit {
   agendamentos: any[] = [];
   carregando = true;
 
+  mensagem = '';
+  tipoMensagem = '';
+
+  mostrarModal = false;
+  agendamentoSelecionadoId = '';
+
   ngOnInit(): void {
     this.carregarAgendamentos();
   }
@@ -45,14 +51,35 @@ export class MyAppointments implements OnInit {
     });
   }
 
-  cancelarAgendamento(id: string): void {
-    const confirmar = confirm(
-      'Tem certeza que deseja cancelar este agendamento?'
-    );
+  mostrarMensagem(mensagem: string, tipo: string): void {
+    this.mensagem = mensagem;
+    this.tipoMensagem = tipo;
 
-    if (!confirmar) {
-      return;
-    }
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.mensagem = '';
+      this.tipoMensagem = '';
+      this.cdr.detectChanges();
+    }, 3000);
+  }
+
+  abrirModalCancelamento(id: string): void {
+    this.agendamentoSelecionadoId = id;
+    this.mostrarModal = true;
+    this.cdr.detectChanges();
+  }
+
+  fecharModalCancelamento(): void {
+    this.mostrarModal = false;
+    this.agendamentoSelecionadoId = '';
+    this.cdr.detectChanges();
+  }
+
+  confirmarCancelamento(): void {
+    const id = this.agendamentoSelecionadoId;
+
+    this.fecharModalCancelamento();
 
     const token = localStorage.getItem('token');
 
@@ -66,18 +93,33 @@ export class MyAppointments implements OnInit {
       }
     ).subscribe({
       next: () => {
-        alert('Agendamento cancelado com sucesso!');
+        this.mostrarMensagem(
+          'Agendamento cancelado com sucesso!',
+          'sucesso'
+        );
+
         this.carregarAgendamentos();
       },
       error: (error) => {
         console.error('Erro ao cancelar agendamento:', error);
-        alert('Erro ao cancelar agendamento.');
+
+        this.mostrarMensagem(
+          'Erro ao cancelar agendamento.',
+          'erro'
+        );
       }
     });
   }
 
   novoAgendamento(): void {
-    this.router.navigate(['/appointments/new']);
+    this.router.navigate(
+      ['/appointments/new'],
+      {
+        queryParams: {
+          from: 'appointments'
+        }
+      }
+    );
   }
 
   voltar(): void {

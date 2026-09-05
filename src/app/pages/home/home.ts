@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
-
   private router = inject(Router);
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
@@ -23,23 +22,27 @@ export class Home implements OnInit {
     this.carregarAgendamento();
   }
 
-
   carregarAgendamento(): void {
     this.http.get<any[]>('https://localhost:7134/api/Appointments').subscribe({
       next: (response) => {
         const agora = new Date();
 
         const agendamentosFuturos = response
-          .filter(agendamento => new Date(agendamento.appointmentDate) >= agora)
+          .filter(
+            agendamento =>
+              agendamento.status === 'Agendado' &&
+              new Date(agendamento.appointmentDate) >= agora
+          )
           .sort(
             (a, b) =>
               new Date(a.appointmentDate).getTime() -
               new Date(b.appointmentDate).getTime()
           );
 
-        this.proximoAgendamento = agendamentosFuturos.length > 0
-          ? agendamentosFuturos[0]
-          : null;
+        this.proximoAgendamento =
+          agendamentosFuturos.length > 0
+            ? agendamentosFuturos[0]
+            : null;
 
         this.carregando = false;
         this.cdr.detectChanges();
@@ -55,28 +58,35 @@ export class Home implements OnInit {
     return !!localStorage.getItem('token');
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
-  irParaLogin() {
+  irParaLogin(): void {
     this.router.navigate(['/login']);
   }
 
-  irParaCadastro() {
+  irParaCadastro(): void {
     this.router.navigate(['/register']);
   }
 
-  irParaServices() {
+  irParaServices(): void {
     this.router.navigate(['/services']);
   }
 
-  irParaAppointments() {
+  irParaAppointments(): void {
     this.router.navigate(['/appointments']);
   }
 
-  irParaNovoAgendamento() {
-  this.router.navigate(['/appointments/new']);
-}
+  irParaNovoAgendamento(): void {
+    this.router.navigate(
+      ['/appointments/new'],
+      {
+        queryParams: {
+          from: 'home'
+        }
+      }
+    );
+  }
 }

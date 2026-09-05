@@ -28,6 +28,9 @@ export class Appointments implements OnInit {
   selectedDate = '';
   selectedTime = '';
 
+  mensagem = '';
+  tipoMensagem = '';
+
   ngOnInit(): void {
     this.http.get('https://localhost:7134/api/Barbers').subscribe({
       next: (response: any) => {
@@ -109,32 +112,57 @@ export class Appointments implements OnInit {
   }
 
   voltar(): void {
-    if (this.route.snapshot.queryParams['serviceId']) {
+    const origem = this.route.snapshot.queryParams['from'];
+
+    if (origem === 'home') {
+      this.router.navigate(['/home']);
+      return;
+    }
+
+    if (origem === 'services') {
       this.router.navigate(['/services']);
+      return;
+    }
+
+    if (origem === 'appointments') {
+      this.router.navigate(['/appointments']);
       return;
     }
 
     this.router.navigate(['/appointments']);
   }
 
+  mostrarMensagem(mensagem: string, tipo: string): void {
+    this.mensagem = mensagem;
+    this.tipoMensagem = tipo;
+
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.mensagem = '';
+      this.tipoMensagem = '';
+      this.cdr.detectChanges();
+    }, 3000);
+  }
+
   confirmarAgendamento(): void {
     if (!this.selectedBarberId) {
-      alert('Selecione um barbeiro.');
+      this.mostrarMensagem('Selecione um barbeiro.', 'erro');
       return;
     }
 
     if (!this.selectedServiceId) {
-      alert('Selecione um serviço.');
+      this.mostrarMensagem('Selecione um serviço.', 'erro');
       return;
     }
 
     if (!this.selectedDate) {
-      alert('Selecione uma data.');
+      this.mostrarMensagem('Selecione uma data.', 'erro');
       return;
     }
 
     if (!this.selectedTime) {
-      alert('Selecione um horário.');
+      this.mostrarMensagem('Selecione um horário.', 'erro');
       return;
     }
 
@@ -162,7 +190,11 @@ export class Appointments implements OnInit {
     ).subscribe({
       next: (response) => {
         console.log(response);
-        alert('Agendamento realizado com sucesso!');
+
+        this.mostrarMensagem(
+          'Agendamento realizado com sucesso!',
+          'sucesso'
+        );
 
         this.selectedBarberId = '';
         this.selectedServiceId = '';
@@ -170,11 +202,17 @@ export class Appointments implements OnInit {
         this.selectedTime = '';
         this.horarios = [];
 
-        this.router.navigate(['/home']);
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 3000);
       },
       error: (error) => {
         console.error(error);
-        alert('Erro ao realizar agendamento.');
+
+        this.mostrarMensagem(
+          'Erro ao realizar agendamento.',
+          'erro'
+        );
       }
     });
   }

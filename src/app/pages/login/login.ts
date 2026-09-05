@@ -18,6 +18,9 @@ export class Login {
   carregando = false;
   erro = '';
 
+  erroEmail = '';
+  erroSenha = '';
+
   constructor(
     private http: HttpClient,
     private authService: Auth,
@@ -25,9 +28,25 @@ export class Login {
     private cdr: ChangeDetectorRef
   ) {}
 
-  login() {
-    this.carregando = true;
+  login(): void {
     this.erro = '';
+    this.erroEmail = '';
+    this.erroSenha = '';
+
+    if (!this.email.trim()) {
+      this.erroEmail = 'Informe seu e-mail.';
+    }
+
+    if (!this.senha.trim()) {
+      this.erroSenha = 'Informe sua senha.';
+    }
+
+    if (this.erroEmail || this.erroSenha) {
+      this.cdr.detectChanges();
+      return;
+    }
+
+    this.carregando = true;
     this.cdr.detectChanges();
 
     const dados = {

@@ -2,46 +2,145 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+<div
+  *ngIf="erro"
+  class="notificacao"
+  [ngClass]="tipoMensagem">
+
+  <div class="notificacao-icone">
+    <span *ngIf="tipoMensagem === 'sucesso'">✓</span>
+    <span *ngIf="tipoMensagem === 'erro'">!</span>
+  </div>
+
+  <div class="notificacao-conteudo">
+
+    <strong>
+      {{ tipoMensagem === 'sucesso' ? 'Sucesso' : 'Atenção' }}
+    </strong>
+
+    <span>
+      {{ erro }}
+    </span>
+
+  </div>
+
+</div>
+
 <div class="container">
+
   <div class="card">
 
     <div class="logo">
       BarberFlow
     </div>
 
-    <h1>Cadastro</h1>
+    <h1>
+      Cadastro
+    </h1>
 
-    <label>Nome</label>
+    <label>
+      Nome
+    </label>
+
     <input
       type="text"
-      placeholder="Digite seu nome">
+      placeholder="Digite seu nome"
+      [(ngModel)]="nome"
+      [class.input-erro]="erroNome"
+      (input)="erroNome = ''">
 
-    <label>E-mail</label>
+    <span
+      class="erro-campo"
+      *ngIf="erroNome">
+
+      {{ erroNome }}
+
+    </span>
+
+    <label>
+      E-mail
+    </label>
+
     <input
       type="email"
-      placeholder="Digite seu e-mail">
+      placeholder="Digite seu e-mail"
+      [(ngModel)]="email"
+      [class.input-erro]="erroEmail"
+      (input)="erroEmail = ''">
 
-    <label>Senha</label>
+    <span
+      class="erro-campo"
+      *ngIf="erroEmail">
+
+      {{ erroEmail }}
+
+    </span>
+
+    <label>
+      Senha
+    </label>
+
     <input
       type="password"
-      placeholder="Digite sua senha">
+      placeholder="Digite sua senha"
+      [(ngModel)]="senha"
+      [class.input-erro]="erroSenha"
+      (input)="erroSenha = ''">
 
-    <label>Confirmar Senha</label>
+    <span
+      class="erro-campo"
+      *ngIf="erroSenha">
+
+      {{ erroSenha }}
+
+    </span>
+
+    <label>
+      Confirmar Senha
+    </label>
+
     <input
       type="password"
-      placeholder="Confirme sua senha">
+      placeholder="Confirme sua senha"
+      [(ngModel)]="confirmarSenha"
+      [class.input-erro]="erroConfirmarSenha"
+      (input)="erroConfirmarSenha = ''">
 
-    <button type="submit">
-      Cadastrar
+    <span
+      class="erro-campo"
+      *ngIf="erroConfirmarSenha">
+
+      {{ erroConfirmarSenha }}
+
+    </span>
+
+    <button
+      type="button"
+      (click)="cadastrar()"
+      [disabled]="carregando">
+
+      <span *ngIf="!carregando">
+        Cadastrar
+      </span>
+
+      <span *ngIf="carregando">
+        Cadastrando...
+      </span>
+
     </button>
 
     <div class="register">
+
       Já possui uma conta?
-      <a (click)="irParaLogin()">Entrar</a>
+
+      <a (click)="irParaLogin()">
+        Entrar
+      </a>
+
     </div>
 
   </div>
+
 </div>
