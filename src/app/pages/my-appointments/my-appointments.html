@@ -1,5 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
@@ -27,9 +28,16 @@
         Carregando agendamentos...
       </div>
 
-      <div class="sem-agendamentos" *ngIf="!carregando && agendamentos.length === 0">
+      <div
+        class="sem-agendamentos"
+        *ngIf="!carregando && agendamentos.length === 0">
+
         <h2>Nenhum agendamento</h2>
-        <p>Você ainda não possui agendamentos.</p>
+
+        <p>
+          Você ainda não possui agendamentos.
+        </p>
+
       </div>
 
       <div
@@ -38,7 +46,9 @@
 
         <div class="appointment-header">
 
-          <h2>{{ agendamento.serviceName }}</h2>
+          <h2>
+            {{ agendamento.serviceName }}
+          </h2>
 
           <span>
             💈 {{ agendamento.barberName }}
@@ -49,29 +59,68 @@
         <div class="detalhes">
 
           <div class="detalhe">
+
             <span>📅</span>
+
             <div>
               <strong>Data</strong>
-              <p>{{ agendamento.appointmentDate | date:'dd/MM/yyyy' }}</p>
+
+              <p>
+                {{ agendamento.appointmentDate | date:'dd/MM/yyyy' }}
+              </p>
             </div>
+
           </div>
 
           <div class="detalhe">
+
             <span>🕐</span>
+
             <div>
               <strong>Horário</strong>
-              <p>{{ agendamento.appointmentDate | date:'HH:mm' }}</p>
+
+              <p>
+                {{ agendamento.appointmentDate | date:'HH:mm' }}
+              </p>
             </div>
+
+          </div>
+
+          <div class="detalhe">
+
+            <span>📌</span>
+
+            <div>
+              <strong>Status</strong>
+
+              <p>
+                {{ agendamento.status }}
+              </p>
+            </div>
+
           </div>
 
         </div>
+
+        <button
+          class="btn-cancelar"
+          *ngIf="agendamento.status === 'Agendado'"
+          (click)="cancelarAgendamento(agendamento.id)">
+
+          Cancelar Agendamento
+
+        </button>
 
       </div>
 
     </div>
 
-    <button class="btn-novo" (click)="novoAgendamento()">
+    <button
+      class="btn-novo"
+      (click)="novoAgendamento()">
+
       + Novo Agendamento
+
     </button>
 
   </div>

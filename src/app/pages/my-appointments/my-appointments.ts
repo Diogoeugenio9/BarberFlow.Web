@@ -45,6 +45,37 @@ export class MyAppointments implements OnInit {
     });
   }
 
+  cancelarAgendamento(id: string): void {
+    const confirmar = confirm(
+      'Tem certeza que deseja cancelar este agendamento?'
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    this.http.put(
+      `https://localhost:7134/api/Appointments/${id}/cancel`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).subscribe({
+      next: () => {
+        alert('Agendamento cancelado com sucesso!');
+        this.carregarAgendamentos();
+      },
+      error: (error) => {
+        console.error('Erro ao cancelar agendamento:', error);
+        alert('Erro ao cancelar agendamento.');
+      }
+    });
+  }
+
   novoAgendamento(): void {
     this.router.navigate(['/appointments/new']);
   }

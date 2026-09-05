@@ -168,3 +168,26 @@ h1 {
     flex-direction: column;
   }
 }
+
+.btn-cancelar {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #dc3545;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancelar:hover {
+  background: #bb2d3b;
+  transform: translateY(-1px);
+}
+
+.btn-cancelar:active {
+  transform: translateY(0);
+}
