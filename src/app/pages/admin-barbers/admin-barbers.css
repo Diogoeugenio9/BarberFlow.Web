@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f7fa;
+  font-family: "Roboto", sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #003f88;
+  padding: 30px 20px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 45px;
+  font-family: "Black Ops One", system-ui;
+  font-size: 32px;
+}
+
+.gestao {
+  padding: 0 15px;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 15px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.menu-item span {
+  width: 20px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-item.ativo {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: 500;
+}
+
+.conteudo {
+  flex: 1;
+  padding: 35px 40px;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.titulo-pequeno {
+  color: #7a8494;
+  font-size: 13px;
+}
+
+.header h1 {
+  margin-top: 5px;
+  color: #1f2937;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.barbeiros {
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.secao-header {
+  margin-bottom: 20px;
+}
+
+.secao-header h2 {
+  margin-top: 5px;
+  color: #1f2937;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.barbeiro {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 5px;
+  border-bottom: 1px solid #edf0f3;
+}
+
+.barbeiro:last-child {
+  border-bottom: none;
+}
+
+.barbeiro-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.barbeiro-icone {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #e8f1ff;
+  color: #003f88;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.barbeiro-info div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.barbeiro-info strong {
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.barbeiro-info span {
+  color: #7a8494;
+  font-size: 12px;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acoes button {
+  height: 36px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 8px;
+  background: #003f88;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.acoes button:hover {
+  background: #002f66;
+}
+
+.acoes .btn-excluir {
+  background: #dc3545;
+}
+
+.acoes .btn-excluir:hover {
+  background: #bb2d3b;
+}
+
+.mensagem {
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7a8494;
+  font-size: 14px;
+}
+
+@media (max-width: 800px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+  }
+
+  nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .menu-item {
+    flex-shrink: 0;
+  }
+
+  .conteudo {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    margin-bottom: 25px;
+  }
+
+  .barbeiros {
+    padding: 20px;
+  }
+
+  .barbeiro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .acoes {
+    width: 100%;
+  }
+
+  .acoes button {
+    flex: 1;
+  }
+}

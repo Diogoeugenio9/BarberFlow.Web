@@ -1,0 +1,140 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      BarberFlow
+    </div>
+
+    <div class="gestao">
+      Gestão
+    </div>
+
+    <nav>
+
+      <div class="menu-item" routerLink="/admin">
+        <span>▣</span>
+        Dashboard
+      </div>
+
+      <div class="menu-item" routerLink="/admin/appointments">
+        <span>◷</span>
+        Agendamentos
+      </div>
+
+      <div class="menu-item ativo">
+        <span>✂</span>
+        Barbeiros
+      </div>
+
+      <div class="menu-item">
+        <span>▤</span>
+        Serviços
+      </div>
+
+      <div class="menu-item">
+        <span>♙</span>
+        Clientes
+      </div>
+
+    </nav>
+
+  </aside>
+
+  <main class="conteudo">
+
+    <header class="header">
+
+      <div>
+        <span class="titulo-pequeno">
+          Painel administrativo
+        </span>
+
+        <h1>
+          Barbeiros
+        </h1>
+      </div>
+
+    </header>
+
+    <section class="barbeiros">
+
+      <div class="secao-header">
+
+        <div>
+          <span class="titulo-pequeno">
+            Equipe
+          </span>
+
+          <h2>
+            Barbeiros cadastrados
+          </h2>
+        </div>
+
+      </div>
+
+      <div *ngIf="carregando" class="mensagem">
+        Carregando barbeiros...
+      </div>
+
+      <div
+        *ngIf="!carregando && barbeiros.length > 0"
+        class="lista">
+
+        <div
+          class="barbeiro"
+          *ngFor="let barbeiro of barbeiros">
+
+          <div class="barbeiro-info">
+
+            <div class="barbeiro-icone">
+              {{ barbeiro.name.charAt(0).toUpperCase() }}
+            </div>
+
+            <div>
+              <strong>
+                {{ barbeiro.name }}
+              </strong>
+
+              <span>
+                Barbeiro
+              </span>
+            </div>
+
+          </div>
+
+          <div class="acoes">
+
+            <button>
+              Editar
+            </button>
+
+            <button class="btn-excluir">
+              Excluir
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        *ngIf="!carregando && barbeiros.length === 0"
+        class="mensagem">
+
+        Nenhum barbeiro encontrado.
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

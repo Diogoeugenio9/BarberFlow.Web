@@ -5,6 +5,10 @@ import { Home } from './pages/home/home';
 import { Services } from './pages/services/services';
 import { Appointments } from './pages/appointments/appointments';
 import { MyAppointments } from './pages/my-appointments/my-appointments';
+import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
+import { AdminAppointments } from './pages/admin-appointments/admin-appointments';
+import { AdminBarbers } from './pages/admin-barbers/admin-barbers';
+import { AdminBarberForm } from './pages/admin-barber-form/admin-barber-form';
 
 export const routes: Routes = [
   {
@@ -35,8 +39,22 @@ export const routes: Routes = [
 {
   path: 'appointments/new',
   component: Appointments
+},
+{ path: 'admin',
+   component: AdminDashboard
+},
+{
+  path: 'admin/appointments',
+  component: AdminAppointments
+},
+{
+  path: 'admin/barbers',
+  component: AdminBarbers
+},
+{
+  path: 'admin/barbers/new',
+  component: AdminBarberForm
 }
-
 
 
 ];

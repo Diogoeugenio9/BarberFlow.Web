@@ -1,0 +1,223 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      BarberFlow
+    </div>
+
+    <div class="gestao">
+      Gestão
+    </div>
+
+    <nav>
+
+      <div class="menu-item ativo">
+        <span>▣</span>
+        Dashboard
+      </div>
+
+      <div class="menu-item">
+        <span>◷</span>
+        Agendamentos
+      </div>
+
+      <div class="menu-item">
+        <span>✂</span>
+        Barbeiros
+      </div>
+
+      <div class="menu-item">
+        <span>▤</span>
+        Serviços
+      </div>
+
+      <div class="menu-item">
+        <span>♙</span>
+        Clientes
+      </div>
+
+    </nav>
+
+  </aside>
+
+  <main class="conteudo">
+
+    <header class="header">
+
+      <div>
+        <span class="titulo-pequeno">
+          Painel administrativo
+        </span>
+
+        <h1>
+          Dashboard
+        </h1>
+      </div>
+
+      <div class="usuario">
+
+        <div class="usuario-info">
+          <span>Olá,</span>
+          <strong>{{ nomeAdmin }}</strong>
+        </div>
+
+        <button
+          class="btn-sair"
+          (click)="logout()">
+
+          Sair
+
+        </button>
+
+      </div>
+
+    </header>
+
+    <section class="cards">
+
+      <div class="card">
+
+        <div class="card-info">
+          <span>Agendamentos hoje</span>
+          <strong>{{ agendamentosHoje }}</strong>
+        </div>
+
+        <div class="card-icone">
+          📅
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-info">
+          <span>Clientes</span>
+          <strong>{{ totalClientes }}</strong>
+        </div>
+
+        <div class="card-icone">
+          👥
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-info">
+          <span>Barbeiros</span>
+          <strong>{{ totalBarbeiros }}</strong>
+        </div>
+
+        <div class="card-icone">
+          ✂️
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-info">
+          <span>Serviços</span>
+          <strong>{{ totalServicos }}</strong>
+        </div>
+
+        <div class="card-icone">
+          💈
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="agendamentos">
+
+      <div class="secao-header">
+
+        <div>
+          <span class="titulo-pequeno">
+            Agenda
+          </span>
+
+          <h2>
+            Próximos agendamentos
+          </h2>
+        </div>
+
+      </div>
+
+      <div
+        *ngIf="proximosAgendamentos.length > 0"
+        class="lista">
+
+        <div
+          class="agendamento"
+          *ngFor="let agendamento of proximosAgendamentos">
+
+          <div class="cliente">
+
+            <div class="cliente-icone">
+              {{ agendamento.clientName.charAt(0).toUpperCase() }}
+            </div>
+
+            <div>
+              <strong>
+                {{ agendamento.clientName }}
+              </strong>
+
+              <span>
+                {{ agendamento.serviceName }}
+              </span>
+            </div>
+
+          </div>
+
+          <div class="barbeiro">
+
+            <span>
+              Barbeiro
+            </span>
+
+            <strong>
+              {{ agendamento.barberName }}
+            </strong>
+
+          </div>
+
+          <div class="data">
+
+            <span>
+              Data e horário
+            </span>
+
+            <strong>
+              {{ agendamento.appointmentDate | date:'dd/MM/yyyy HH:mm' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        *ngIf="proximosAgendamentos.length === 0"
+        class="sem-agendamentos">
+
+        <span>
+          Nenhum próximo agendamento.
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

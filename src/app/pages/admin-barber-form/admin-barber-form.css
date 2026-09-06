@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f7fa;
+  font-family: "Roboto", sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #003f88;
+  padding: 30px 20px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 45px;
+  font-family: "Black Ops One", system-ui;
+  font-size: 32px;
+}
+
+.gestao {
+  padding: 0 15px;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 15px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.menu-item span {
+  width: 20px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-item.ativo {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: 500;
+}
+
+.conteudo {
+  flex: 1;
+  padding: 35px 40px;
+  overflow-x: hidden;
+}
+
+.header {
+  margin-bottom: 35px;
+}
+
+.titulo-pequeno {
+  color: #7a8494;
+  font-size: 13px;
+}
+
+.header h1 {
+  margin-top: 5px;
+  color: #1f2937;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.formulario {
+  max-width: 900px;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.secao-header {
+  margin-bottom: 25px;
+}
+
+.secao-header h2 {
+  margin-top: 5px;
+  color: #1f2937;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo label {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.campo input {
+  width: 100%;
+  height: 45px;
+  padding: 0 14px;
+  border: 1px solid #dce1e7;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #1f2937;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.campo input::placeholder {
+  color: #a0a8b3;
+}
+
+.campo input:focus {
+  border-color: #003f88;
+  box-shadow: 0 0 0 3px rgba(0, 63, 136, 0.08);
+}
+
+.erro {
+  margin-bottom: 20px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: #fdecec;
+  color: #dc3545;
+  font-size: 13px;
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #edf0f3;
+}
+
+.acoes button {
+  height: 42px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background: #eef1f4;
+  color: #4b5563;
+}
+
+.btn-cancelar:hover {
+  background: #e2e6ea;
+}
+
+.btn-cadastrar {
+  background: #003f88;
+  color: white;
+}
+
+.btn-cadastrar:hover {
+  background: #002f66;
+}
+
+.btn-cadastrar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 800px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+  }
+
+  nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .menu-item {
+    flex-shrink: 0;
+  }
+
+  .conteudo {
+    padding: 25px 20px;
+  }
+
+  .formulario {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .formulario {
+    padding: 20px;
+  }
+
+  .acoes {
+    flex-direction: column-reverse;
+  }
+
+  .acoes button {
+    width: 100%;
+  }
+}
