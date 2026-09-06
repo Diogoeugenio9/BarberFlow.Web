@@ -54,6 +54,10 @@ export const routes: Routes = [
 {
   path: 'admin/barbers/new',
   component: AdminBarberForm
+},
+{
+  path: 'admin/barbers/edit/:id',
+  component: AdminBarberForm
 }
 
 

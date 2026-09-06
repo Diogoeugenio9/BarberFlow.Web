@@ -1,9 +1,8 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
-
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-barber-form',
@@ -12,10 +11,13 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './admin-barber-form.html',
   styleUrl: './admin-barber-form.css',
 })
-export class AdminBarberForm {
+export class AdminBarberForm implements OnInit {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef);
+
+  id = '';
 
   nome = '';
   email = '';
@@ -23,9 +25,49 @@ export class AdminBarberForm {
   especialidade = '';
 
   carregando = false;
+  carregandoDados = false;
   erro = '';
 
-  cadastrar(): void {
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id') || '';
+
+    if (this.id) {
+      this.carregarBarbeiro();
+    }
+  }
+
+  carregarBarbeiro(): void {
+    this.carregandoDados = true;
+
+    const token = localStorage.getItem('token');
+
+    this.http.get<any>(
+      `https://localhost:7134/api/Barbers/${this.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).subscribe({
+      next: (response) => {
+        this.nome = response.name;
+        this.email = response.email;
+        this.telefone = response.phone;
+        this.especialidade = response.specialty;
+
+        this.carregandoDados = false;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        this.carregandoDados = false;
+        this.erro = 'Não foi possível carregar o barbeiro.';
+        this.cdr.detectChanges();
+        console.error('Erro ao carregar barbeiro:', error);
+      }
+    });
+  }
+
+  salvar(): void {
     this.erro = '';
 
     if (!this.nome.trim()) {
@@ -54,6 +96,31 @@ export class AdminBarberForm {
       phone: this.telefone,
       specialty: this.especialidade
     };
+
+    if (this.id) {
+      this.http.put(
+        `https://localhost:7134/api/Barbers/${this.id}`,
+        dados,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      ).subscribe({
+        next: () => {
+          this.carregando = false;
+          this.router.navigate(['/admin/barbers']);
+        },
+        error: (error) => {
+          this.carregando = false;
+          this.erro = 'Não foi possível atualizar o barbeiro.';
+          this.cdr.detectChanges();
+          console.error('Erro ao atualizar barbeiro:', error);
+        }
+      });
+
+      return;
+    }
 
     this.http.post(
       'https://localhost:7134/api/Barbers',

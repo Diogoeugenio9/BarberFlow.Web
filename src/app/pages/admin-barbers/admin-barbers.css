@@ -103,7 +103,10 @@ nav {
 }
 
 .secao-header {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 }
 
 .secao-header h2 {
@@ -111,6 +114,34 @@ nav {
   color: #1f2937;
   font-size: 20px;
   font-weight: 600;
+}
+
+.btn-novo {
+  height: 42px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9px;
+  background: #003f88;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 63, 136, 0.15);
+}
+
+.btn-novo:hover {
+  background: #002f66;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 63, 136, 0.2);
+}
+
+.btn-novo:active {
+  transform: translateY(0);
 }
 
 .lista {
@@ -243,6 +274,16 @@ nav {
 
   .barbeiros {
     padding: 20px;
+  }
+
+  .secao-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .btn-novo {
+    flex-shrink: 0;
+    padding: 0 15px;
   }
 
   .barbeiro {

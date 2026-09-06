@@ -57,7 +57,7 @@
         </span>
 
         <h1>
-          Novo Barbeiro
+          {{ id ? 'Editar Barbeiro' : 'Novo Barbeiro' }}
         </h1>
       </div>
 
@@ -155,15 +155,15 @@
         <button
           type="button"
           class="btn-cadastrar"
-          (click)="cadastrar()"
+          (click)="salvar()"
           [disabled]="carregando">
 
           <span *ngIf="!carregando">
-            Cadastrar
+            {{ id ? 'Atualizar' : 'Cadastrar' }}
           </span>
 
           <span *ngIf="carregando">
-            Cadastrando...
+            {{ id ? 'Atualizando...' : 'Cadastrando...' }}
           </span>
 
         </button>

@@ -43,4 +43,36 @@ export class AdminBarbers implements OnInit {
       }
     });
   }
+
+  excluir(id: string): void {
+    const confirmar = confirm(
+      'Tem certeza que deseja excluir este barbeiro?'
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    this.http.delete(
+      `https://localhost:7134/api/Barbers/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).subscribe({
+      next: () => {
+        this.barbeiros = this.barbeiros.filter(
+          barbeiro => barbeiro.id !== id
+        );
+
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Erro ao excluir barbeiro:', error);
+      }
+    });
+  }
 }
