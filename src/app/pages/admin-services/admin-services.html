@@ -1,0 +1,175 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      BarberFlow
+    </div>
+
+    <div class="gestao">
+      Gestão
+    </div>
+
+    <nav>
+
+      <div class="menu-item" routerLink="/admin">
+        <span>▣</span>
+        Dashboard
+      </div>
+
+      <div class="menu-item" routerLink="/admin/appointments">
+        <span>◷</span>
+        Agendamentos
+      </div>
+
+      <div class="menu-item" routerLink="/admin/barbers">
+        <span>✂</span>
+        Barbeiros
+      </div>
+
+      <div class="menu-item ativo">
+        <span>▤</span>
+        Serviços
+      </div>
+
+      <div class="menu-item">
+        <span>♙</span>
+        Clientes
+      </div>
+
+    </nav>
+
+  </aside>
+
+  <main class="conteudo">
+
+    <header class="header">
+
+      <div>
+        <span class="titulo-pequeno">
+          Painel administrativo
+        </span>
+
+        <h1>
+          Serviços
+        </h1>
+      </div>
+
+    </header>
+
+    <section class="servicos">
+
+      <div class="secao-header">
+
+        <div>
+
+          <span class="titulo-pequeno">
+            Catálogo
+          </span>
+
+          <h2>
+            Serviços cadastrados
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn-novo">
+
+          + Novo Serviço
+
+        </button>
+
+      </div>
+
+      <div
+        *ngIf="carregando"
+        class="mensagem">
+
+        Carregando serviços...
+
+      </div>
+
+      <div
+        *ngIf="!carregando && servicos.length > 0"
+        class="lista">
+
+        <div
+          class="servico"
+          *ngFor="let servico of servicos">
+
+          <div class="servico-info">
+
+            <div class="servico-icone">
+              💈
+            </div>
+
+            <div>
+
+              <strong>
+                {{ servico.name }}
+              </strong>
+
+              <span>
+                {{ servico.durationInMinutes }} minutos
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="preco">
+
+            <span>
+              Preço
+            </span>
+
+            <strong>
+              {{ servico.price | currency:'BRL':'symbol':'1.2-2' }}
+            </strong>
+
+          </div>
+
+          <div class="acoes">
+
+            <button
+              type="button">
+
+              Editar
+
+            </button>
+
+            <button
+              type="button"
+              class="btn-excluir">
+
+              Excluir
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        *ngIf="!carregando && servicos.length === 0"
+        class="mensagem">
+
+        Nenhum serviço encontrado.
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
