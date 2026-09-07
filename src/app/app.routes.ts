@@ -10,6 +10,7 @@ import { AdminAppointments } from './pages/admin-appointments/admin-appointments
 import { AdminBarbers } from './pages/admin-barbers/admin-barbers';
 import { AdminBarberForm } from './pages/admin-barber-form/admin-barber-form';
 import { AdminServices } from './pages/admin-services/admin-services';
+import { AdminServiceForm } from './pages/admin-service-form/admin-service-form';
 
 export const routes: Routes = [
   {
@@ -63,7 +64,13 @@ export const routes: Routes = [
 {
   path: 'admin/services',
   component: AdminServices
-}
+},
+{ path: 'admin/services/new',
+   component: AdminServiceForm
+},
+{ path: 'admin/services/edit/:id',
+   component: AdminServiceForm
+},
 
 
 ];

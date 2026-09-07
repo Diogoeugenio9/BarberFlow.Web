@@ -1,7 +1,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <div class="admin-layout">
@@ -52,6 +54,7 @@
     <header class="header">
 
       <div>
+
         <span class="titulo-pequeno">
           Painel administrativo
         </span>
@@ -59,6 +62,7 @@
         <h1>
           Serviços
         </h1>
+
       </div>
 
     </header>
@@ -81,7 +85,8 @@
 
         <button
           type="button"
-          class="btn-novo">
+          class="btn-novo"
+          routerLink="/admin/services/new">
 
           + Novo Serviço
 
@@ -140,7 +145,8 @@
           <div class="acoes">
 
             <button
-              type="button">
+              type="button"
+              [routerLink]="['/admin/services/edit', servico.id]">
 
               Editar
 
@@ -148,7 +154,8 @@
 
             <button
               type="button"
-              class="btn-excluir">
+              class="btn-excluir"
+              (click)="excluir(servico.id)">
 
               Excluir
 

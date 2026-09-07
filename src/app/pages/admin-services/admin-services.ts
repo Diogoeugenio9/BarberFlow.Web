@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class AdminServices implements OnInit {
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   servicos: any[] = [];
   carregando = true;
@@ -40,6 +41,39 @@ export class AdminServices implements OnInit {
       error: (error) => {
         this.carregando = false;
         console.error('Erro ao carregar serviços:', error);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  excluir(id: string): void {
+    const confirmar = confirm(
+      'Tem certeza que deseja excluir este serviço?'
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    this.http.delete(
+      `https://localhost:7134/api/Services/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).subscribe({
+      next: () => {
+        this.servicos = this.servicos.filter(
+          servico => servico.id !== id
+        );
+
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Erro ao excluir serviço:', error);
       }
     });
   }
