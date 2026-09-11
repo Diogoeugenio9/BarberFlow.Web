@@ -11,6 +11,8 @@ import { AdminBarbers } from './pages/admin-barbers/admin-barbers';
 import { AdminBarberForm } from './pages/admin-barber-form/admin-barber-form';
 import { AdminServices } from './pages/admin-services/admin-services';
 import { AdminServiceForm } from './pages/admin-service-form/admin-service-form';
+import { AdminClients } from './pages/admin-clients/admin-clients';
+import { AdminClientForm } from './pages/admin-client-form/admin-client-form';
 
 export const routes: Routes = [
   {
@@ -71,6 +73,15 @@ export const routes: Routes = [
 { path: 'admin/services/edit/:id',
    component: AdminServiceForm
 },
+{
+  path: 'admin/clients',
+  component: AdminClients
+},
+{
+  path: 'admin/clients/edit/:id',
+  component: AdminClientForm
+},
+
 
 
 ];
