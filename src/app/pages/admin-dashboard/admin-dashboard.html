@@ -1,6 +1,5 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -17,32 +16,30 @@
     </div>
 
     <nav>
-
-      <div class="menu-item ativo">
+      <a class="menu-item ativo" routerLink="/admin">
         <span>▣</span>
         Dashboard
-      </div>
+      </a>
 
-      <div class="menu-item">
+      <a class="menu-item" routerLink="/admin/appointments">
         <span>◷</span>
         Agendamentos
-      </div>
+      </a>
 
-      <div class="menu-item">
+      <a class="menu-item" routerLink="/admin/barbers">
         <span>✂</span>
         Barbeiros
-      </div>
+      </a>
 
-      <div class="menu-item">
+      <a class="menu-item" routerLink="/admin/services">
         <span>▤</span>
         Serviços
-      </div>
+      </a>
 
-      <div class="menu-item">
+      <a class="menu-item" routerLink="/admin/clients">
         <span>♙</span>
         Clientes
-      </div>
-
+      </a>
     </nav>
 
   </aside>
@@ -52,6 +49,7 @@
     <header class="header">
 
       <div>
+
         <span class="titulo-pequeno">
           Painel administrativo
         </span>
@@ -59,21 +57,28 @@
         <h1>
           Dashboard
         </h1>
+
       </div>
 
       <div class="usuario">
 
         <div class="usuario-info">
-          <span>Olá,</span>
-          <strong>{{ nomeAdmin }}</strong>
+
+          <span>
+            Olá,
+          </span>
+
+          <strong>
+            {{ nomeAdmin }}
+          </strong>
+
         </div>
 
         <button
           class="btn-sair"
-          (click)="logout()">
-
+          (click)="logout()"
+        >
           Sair
-
         </button>
 
       </div>
@@ -85,8 +90,15 @@
       <div class="card">
 
         <div class="card-info">
-          <span>Agendamentos hoje</span>
-          <strong>{{ agendamentosHoje }}</strong>
+
+          <span>
+            Agendamentos hoje
+          </span>
+
+          <strong>
+            {{ agendamentosHoje }}
+          </strong>
+
         </div>
 
         <div class="card-icone">
@@ -98,8 +110,15 @@
       <div class="card">
 
         <div class="card-info">
-          <span>Clientes</span>
-          <strong>{{ totalClientes }}</strong>
+
+          <span>
+            Clientes
+          </span>
+
+          <strong>
+            {{ totalClientes }}
+          </strong>
+
         </div>
 
         <div class="card-icone">
@@ -111,8 +130,15 @@
       <div class="card">
 
         <div class="card-info">
-          <span>Barbeiros</span>
-          <strong>{{ totalBarbeiros }}</strong>
+
+          <span>
+            Barbeiros
+          </span>
+
+          <strong>
+            {{ totalBarbeiros }}
+          </strong>
+
         </div>
 
         <div class="card-icone">
@@ -124,8 +150,15 @@
       <div class="card">
 
         <div class="card-info">
-          <span>Serviços</span>
-          <strong>{{ totalServicos }}</strong>
+
+          <span>
+            Serviços
+          </span>
+
+          <strong>
+            {{ totalServicos }}
+          </strong>
+
         </div>
 
         <div class="card-icone">
@@ -141,6 +174,7 @@
       <div class="secao-header">
 
         <div>
+
           <span class="titulo-pequeno">
             Agenda
           </span>
@@ -148,17 +182,20 @@
           <h2>
             Próximos agendamentos
           </h2>
+
         </div>
 
       </div>
 
       <div
         *ngIf="proximosAgendamentos.length > 0"
-        class="lista">
+        class="lista"
+      >
 
         <div
           class="agendamento"
-          *ngFor="let agendamento of proximosAgendamentos">
+          *ngFor="let agendamento of proximosAgendamentos"
+        >
 
           <div class="cliente">
 
@@ -167,6 +204,7 @@
             </div>
 
             <div>
+
               <strong>
                 {{ agendamento.clientName }}
               </strong>
@@ -174,6 +212,7 @@
               <span>
                 {{ agendamento.serviceName }}
               </span>
+
             </div>
 
           </div>
@@ -208,7 +247,8 @@
 
       <div
         *ngIf="proximosAgendamentos.length === 0"
-        class="sem-agendamentos">
+        class="sem-agendamentos"
+      >
 
         <span>
           Nenhum próximo agendamento.
